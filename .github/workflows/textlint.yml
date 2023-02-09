@@ -32,4 +32,6 @@ jobs:
           npm install 
       - name: Execute textlint
         run: |
-          npx textlint -f checkstyle **/**.tex
+          sudo touch ./textlint.log
+          echo | npx textlint -f checkstyle **/**.tex >> ./textlint.log
+          echo textlint.log
