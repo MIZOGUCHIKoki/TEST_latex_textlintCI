@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  reviewdog-check:
+  textlint_LaTeX:
     name: reviewdog (check)
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +32,7 @@ jobs:
           npm install
       - name: Execute textlint
         run: |
+          touch ./textlint.log
           npx textlint -f checkstyle main.tex kadai1.tex >> ./textlint.log
       - name: Run reviewdog
         if: failure()
