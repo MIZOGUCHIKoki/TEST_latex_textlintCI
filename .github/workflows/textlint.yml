@@ -33,7 +33,7 @@ jobs:
       - name: Execute textlint
         run: |
           chmod 750 textlint.sh
-          bash testlint.sh
+          bash textlint.sh
       - name: Run reviewdog
         if: failure()
         env:
