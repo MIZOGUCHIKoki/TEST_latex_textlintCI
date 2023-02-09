@@ -36,7 +36,7 @@ jobs:
       - name: POST Comment on PullRequest
         if  : failure()
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           URL: ${{ github.event.pull_request.html_url }}
         run: |
           gh pr comment -F ./textlint.log "${URL}"
