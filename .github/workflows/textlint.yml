@@ -33,5 +33,5 @@ jobs:
       - name: Execute textlint
         run: |
           sudo touch ./textlint.log
-          echo | npx textlint -f checkstyle **/**.tex >> ./textlint.log
-          echo textlint.log
+          sudo echo | npx textlint -f checkstyle **/**.tex >> ./textlint.log
+          sudo echo textlint.log
