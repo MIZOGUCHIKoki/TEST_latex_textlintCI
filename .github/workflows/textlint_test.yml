@@ -21,7 +21,7 @@ jobs:
       - name: Run textlint
         run: npx textlint **/**.tex -o ./.textlint.log
       - name: Report if textlint finds problems
-      - if: failure()
+        if: ${{ failure() }}
         run: |
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
