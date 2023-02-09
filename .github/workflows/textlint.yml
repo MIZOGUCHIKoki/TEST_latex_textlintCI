@@ -1,8 +1,6 @@
 name: run-textlint
 on: 
-  pull_request_target:
-    types: [ opened, synchronize ]
-    paths: [ 'contents/**/*.md' ]
+  pull_request:
 jobs:
   run-textlint:
     runs-on: ubuntu-latest
