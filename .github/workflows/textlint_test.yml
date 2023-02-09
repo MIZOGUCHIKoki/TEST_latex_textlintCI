@@ -19,13 +19,14 @@ jobs:
       - name: Install packages via packages.json
         run: npm install
       - name: Run textlint
-        run: npx textlint **/**.tex -o ./.textlint.log
+        run: npx textlint **/**.tex >> ./.textlint.log
       - name: Report if textlint finds problems
         if: ${{ failure() }}
         run: |
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             cat ./.textlint.log | sed "s/${pwd_esc}/### :policeman: ./g" >> ./.body.txt
+            echo "```" >> ./.body.txt
             # pr comment
             gh pr comment --body-file ./.body.txt "${URL}"      
         env:
