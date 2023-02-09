@@ -8,6 +8,7 @@
             "ja-no-mixed-period": {
                 "periodMark": "．" 
             },
+            "no-unmatched-pair": false,
             "max-kanji-continuous-len": false,
             "sentence-length": false,
             "max-comma": false
