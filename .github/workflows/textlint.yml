@@ -1,8 +1,6 @@
 name: run-textlint-minimum
 on: 
-  pull_request:
-    types:
-      - open
+  push:
 jobs:
   run-textlint-minimum:
     runs-on: ubuntu-latest
