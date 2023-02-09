@@ -29,13 +29,7 @@ jobs:
             node-
       - name: install dependencies
         run: |
-          npm install
+          npm install 
       - name: Execute textlint
         run: |
-          npx textlint kadai1.tex
-      - name: Run reviewdog
-        if: failure()
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cat .textlint.log | reviewdog -f=checkstyle -name="textlint" -reporter="github-pr-review"
+          npx textlint -f checkstyle **/**.tex
