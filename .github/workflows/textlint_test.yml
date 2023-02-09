@@ -1,6 +1,6 @@
 name: run-textlint
 on: 
-  push
+  pull_request:
 jobs:
   run-textlint:
     runs-on: ubuntu-latest
@@ -18,18 +18,19 @@ jobs:
           cache: 'npm'
       - name: Install packages via packages.json
         run: npm install
-      - name: Run textlint (avoiding error)
-        run: npx textlint **/**.tex -o ./.textlint.log | true
-        shell: bash {0}
+      - name: Run textlint
+        run: npx textlint **/**.tex >> ./.textlint.log
       - name: Report if textlint finds problems
+        if: ${{ failure() }}
         run: |
-          if [ -e ./.textlint.log ]; then
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             cat ./.textlint.log | sed "s/${pwd_esc}/### :policeman: ./g" >> ./.body.txt
+            sed -e "2i \`\`\`" .body.txt
+            sed -e '$a \`\`\`' .body.txt
+            cat .body.txt
             # pr comment
-            gh pr comment --body-file ./.body.txt "${URL}"
-          fi        
+            gh pr comment --body-file ./.body.txt "${URL}"      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.html_url }}
