@@ -3,6 +3,8 @@ on:
   pull_request_target:
     types:
       - open
+    branches:
+      - main
 jobs:
   run-textlint-minimum:
     runs-on: ubuntu-latest
