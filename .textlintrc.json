@@ -8,9 +8,11 @@
             "ja-no-mixed-period": {
                 "periodMark": "．" 
             },
+            "no-unmatched-pair": false,
             "max-kanji-continuous-len": false,
             "sentence-length": false,
-            "max-comma": false
+            "max-comma": false,
+            "no-exclamation-question-mark": false
         },
         "preset-ja-engineering-paper": true,
         "preset-jtf-style": {
