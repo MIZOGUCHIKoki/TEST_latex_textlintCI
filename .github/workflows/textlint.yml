@@ -1,6 +1,8 @@
 name: run-textlint
 on: 
   pull_request:
+    types:
+      - opened
 jobs:
   run-textlint:
     runs-on: ubuntu-latest
