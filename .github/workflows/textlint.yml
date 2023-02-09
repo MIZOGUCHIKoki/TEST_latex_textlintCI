@@ -32,8 +32,8 @@ jobs:
           npm install
       - name: Execute textlint
         run: |
-          touch ./textlint.log
-          npx textlint -f checkstyle main.tex kadai1.tex >> ./textlint.log
+          chmod 750 textlint.sh
+          bash testlint.sh
       - name: Run reviewdog
         if: failure()
         env:
