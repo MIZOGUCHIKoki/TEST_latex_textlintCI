@@ -33,10 +33,10 @@ jobs:
       - name: Execute textlint
         run: | 
           npx textlint -f checkstyle **/**.tex >> textlint.log
-      - name: Run reviewdog
+      - name: POST Comment on PullRequest
         if  : failure()
         env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}
         run: |
-          cat textlint.log
-          cat textlint.log | reviewdog -f=checkstyle -name="textlint" -reporter="github-pr-review"
+          gh pr comment -F ./textlint.log "${URL}"
