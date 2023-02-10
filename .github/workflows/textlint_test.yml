@@ -26,16 +26,14 @@ jobs:
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
-						# install xsltproc, xmllint
-						apt install install xsltproc libxml2-utils
-						# format XML
-						xmllint --format ./.textlint.xml > ./.textlint.xml
-						sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./.textlint.xml > ./.textlint.xml
-            # create body file
-            pwd_esc=$(pwd | sed 's/\//\\\//g')
-						xsltproc --output ./.body.html toHTML.xsl .textlint.xml
-            # pr comment
-            gh pr comment --body-file ./.body.txt "${URL}"      
+	   apt install install xsltproc libxml2-utils
+	   xmllint --format ./.textlint.xml > ./.textlint.xml
+	   sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./.textlint.xml > ./.textlint.xml
+           # create body file
+           pwd_esc=$(pwd | sed 's/\//\\\//g')
+	   xsltproc --output ./.body.html toHTML.xsl .textlint.xml
+           # pr comment
+           gh pr comment --body-file ./.body.txt "${URL}"      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.html_url }}
