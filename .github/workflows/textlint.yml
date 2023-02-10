@@ -26,7 +26,7 @@ jobs:
             npx textlint -f checkstyle **/**.tex -o ./textlint.xml
             cat ./textlint.xml
       - name: Report if textlint finds problems
-        if: ${{ failure() && github.ref != 'refs/heads/main'}}
+        if: ${{ !failure() && github.ref != 'refs/heads/main'}}
         run: |
             apt install install xsltproc libxml2-utils
             xmllint --format ./textlint.xml > ./textlint.xml
