@@ -22,7 +22,9 @@ jobs:
       - name: Install packages via packages.json
         run: npm install
       - name: Run textlint (avoiding error)
-        run: npx textlint **/**.tex -o ./textlint.xml
+        run: |
+            npx textlint **/**.tex -o ./textlint.xml
+            cat ./textlint.xml
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
