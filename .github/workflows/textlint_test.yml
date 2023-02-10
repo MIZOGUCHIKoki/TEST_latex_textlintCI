@@ -23,9 +23,8 @@ jobs:
         run: npm install
       - name: Run textlint
         run: npx textlint **/**.tex >> ./.textlint.log
-        if: github.ref == 'refs/heads/main'
       - name: Report if textlint finds problems
-        if: ${{ failure() }}
+        if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
