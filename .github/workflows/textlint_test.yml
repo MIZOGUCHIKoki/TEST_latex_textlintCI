@@ -23,6 +23,7 @@ jobs:
         run: npm install
       - name: Run textlint
         run: npx textlint **/**.tex >> ./.textlint.log
+        if: github.ref == 'refs/heads/main'
       - name: Report if textlint finds problems
         if: ${{ failure() }}
         run: |
@@ -30,7 +31,6 @@ jobs:
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             cat ./.textlint.log | sed "s/^/\` /" | sed "s/$/\`/" >> ./.textlint.log
             cat ./.textlint.log | sed "s/${pwd_esc}/### :policeman: ./g"  >> ./.body.txt
-            
             cat .body.txt
             # pr comment
             gh pr comment --body-file ./.body.txt "${URL}"      
