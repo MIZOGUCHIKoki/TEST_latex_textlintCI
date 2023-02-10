@@ -28,7 +28,7 @@ jobs:
         run: |
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
-            cat ./.textlint.log | sed "s/^/\` /" | sed "s/$/\`/" >> ./.textlint.log
+            cat ./.textlint.log | sed "s/^/\[-]/" >> ./.textlint.log
             cat ./.textlint.log | sed "s/${pwd_esc}/### :policeman: ./g"  >> ./.body.txt
             cat .body.txt
             # pr comment
