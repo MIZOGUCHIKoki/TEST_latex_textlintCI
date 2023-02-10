@@ -23,7 +23,7 @@ jobs:
         run: npm install
       - name: Run textlint (avoiding error)
         run: |
-            npx textlint **/**.tex -o ./textlint.xml
+            npx textlint -f checkstyle **/**.tex -o ./textlint.xml
             cat ./textlint.xml
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
