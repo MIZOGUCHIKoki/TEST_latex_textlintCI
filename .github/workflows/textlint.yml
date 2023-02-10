@@ -1,0 +1,39 @@
+name: run-textlint
+on: 
+pull_request:
+push:
+branches:
+- main
+jobs:
+run-textlint:
+runs-on: ubuntu-latest
+permissions:
+pull-requests: write
+steps:
+- name: Switch to pull request branch
+uses: actions/checkout@v3
+with:
+ref: ${{ github.event.pull_request.head.sha }}
+- name: Setup node with cache
+uses: actions/setup-node@v3
+with:
+node-version: 14
+cache: 'npm'
+- name: Install packages via packages.json
+run: npm install
+- name: Run textlint
+run: npx textlint -f checkstyle **/**.tex >> ./.textlint.xml
+- name: Report if textlint finds problems
+if: ${{ failure() && github.ref != 'refs/heads/main'}}
+run: |
+apt install install xsltproc libxml2-utils
+xmllint --format ./.textlint.xml > ./.textlint.xml
+sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./.textlint.xml > ./.textlint.xml
+# create body file
+pwd_esc=$(pwd | sed 's/\//\\\//g')
+xsltproc --output ./.body.html toHTML.xsl .textlint.xml
+# pr comment
+gh pr comment --body-file ./.body.txt "${URL}"      
+env:
+GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+URL: ${{ github.event.pull_request.html_url }}
