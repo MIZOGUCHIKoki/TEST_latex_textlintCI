@@ -22,13 +22,18 @@ jobs:
       - name: Install packages via packages.json
         run: npm install
       - name: Run textlint
-        run: npx textlint **/**.tex >> ./.textlint.log
+        run: npx textlint -f checkstyle **/**.tex >> ./.textlint.xml
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
+						# install xsltproc, xmllint
+						apt install install xsltproc libxml2-utils
+						# format XML
+						xmllint --format ./.textlint.xml > ./.textlint.xml
+						sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./.textlint.xml > ./.textlint.xml
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
-            cat ./.textlint.log | sed "s/${pwd_esc}/### :policeman: "  >> ./.body.txt
+						xsltproc --output ./.body.html toHTML.xsl .textlint.xml
             # pr comment
             gh pr comment --body-file ./.body.txt "${URL}"      
         env:
