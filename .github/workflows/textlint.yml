@@ -48,8 +48,7 @@ jobs:
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             xsltproc --output body.html ./toHTML.xsl ptextlint.xml
             cat body.html
-            cat  body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
-            ./.body.html
+            cat body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
             # pr comment
             gh pr comment --body-file ./.body.html "${URL}"      
         env:
