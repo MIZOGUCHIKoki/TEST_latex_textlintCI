@@ -19,9 +19,6 @@ jobs:
       - name: Download Config files
         run: |
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
-#          rm -rf .textlinc.json package-lock.json package.json
-#          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
-#          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
@@ -29,7 +26,7 @@ jobs:
           cache: npm
       - name: Install packages via packages.json
         run: |
-          rm -rf package-lock.json package.json .textlintrc.json
+          rm -rf package.json .textlintrc.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
           npm install
