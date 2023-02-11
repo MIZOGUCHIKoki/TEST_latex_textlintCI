@@ -18,6 +18,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Download config files
         run: |
+          rm -rf .textlinc.json package-lock.json package.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
