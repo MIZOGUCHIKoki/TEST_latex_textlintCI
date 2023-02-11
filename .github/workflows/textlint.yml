@@ -41,7 +41,7 @@ jobs:
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
-            cat ./.textlintrc.xml
+            cat ./textlint.xml
             wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/toHTML.xsl
             ls -a
             sudo apt-get install xsltproc libxml2-utils
