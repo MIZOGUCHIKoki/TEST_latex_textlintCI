@@ -12,37 +12,53 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Switch to pull request branch
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Setup node with cache
+      - run: rm -rf lock-package.json
+      - name: wget package-lock.json
+        uses: wei/wget@v1
+        with:
+          args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
+      - name: Setup-node
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: 'npm'
+          cache: npm
+      - run : rm -rf package.json .textlint.json
+      - name: wget package.json
+        uses: wei/wget@v1
+        with:
+          args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
+      - name: wget .textlinrc.json
+        uses: wei/wget@v1
+        with:
+          args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
+      - run: cat ./.textlintrc.json
       - name: Install packages via packages.json
         run: |
-          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
-          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
-          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
           npm install
-      - name: Run textlint (avoiding error)
+      - name: Run textlint
         run: |
+            ls -a
+            cat .textlintrc.json
             npx textlint -f checkstyle **/**.tex >> ./textlint.xml
             echo $?
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
+            cat ./textlint.xml
             wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/toHTML.xsl
+            ls -a
             sudo apt-get install xsltproc libxml2-utils
-            sudo xmllint --format ./textlint.xml > ./ftextlint.xml
-            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
-            # create body file
+            xmllint --format ./textlint.xml > ./ftextlint.xml
+            sed 2i\<?xml-stylesheet\ type=text\/xsl\ href=./toHTML.xsl\ \?\> ./ftextlint.xml > ./ptextlint.xml
+            sed -i 's/([^)]*)//g' ./ptextlint.xml
+            sed -i 's/eslint.rules.//g' ./ptextlint.xml
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             xsltproc --output body.html ./toHTML.xsl ptextlint.xml
-            cat  body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
-            # pr comment
+            cat body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
             gh pr comment --body-file ./.body.html "${URL}"      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
