@@ -1,4 +1,4 @@
-name: fixed_text
+name: run-fixText
 
 on: 
   issue_comment:
