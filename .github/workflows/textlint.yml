@@ -33,7 +33,7 @@ jobs:
           args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
       - name: wget .textlinrc.json
         uses: wei/wget@v1
-        if: always() 
+        if: always()
         with:
           args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
       - run: cat ./.textlintrc.json
