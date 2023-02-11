@@ -24,7 +24,7 @@ jobs:
           git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/MIZOGUCHIKoki/ConfigFiles
       - name: moved files
         run: | 
-          cp ConfigFiles/tex_textlint/* ./
+          cp -a ConfigFiles/tex_textlint/* ./
           ls -a
       - name: Setup-node
         uses: actions/setup-node@v3
