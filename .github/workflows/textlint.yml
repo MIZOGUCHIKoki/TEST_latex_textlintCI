@@ -23,7 +23,8 @@ jobs:
         run: |
           git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/MIZOGUCHIKoki/ConfigFiles
       - name: moved files
-        run: | ls -a
+        run: | 
+          ls -a
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
