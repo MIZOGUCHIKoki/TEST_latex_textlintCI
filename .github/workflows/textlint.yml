@@ -16,11 +16,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Setup node
+      - name: Setup-node
         uses: actions/setup-node@v3
         with:
           node-version: 14   
       - name: Download config files
+        if: ${{ needs.Setup-node.result == 'success' }}
         run: |
           rm -rf .textlinc.json package-lock.json package.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
