@@ -22,11 +22,11 @@
 	<table>
 		<thead>
 			<tr>
-				<th><small>Line</small></th>
-				<th><small>Column</small></th>
-				<th><small>Severity</small></th>
-				<th><small>Message</small></th>
-				<th><small>Source</small></th>
+				<th width="50"><small>Line</small></th>
+				<th width="50"><small>Column</small></th>
+				<th width="50"><small>Severity</small></th>
+				<th width="100"><small>Message</small></th>
+				<th width="70"><small>Source</small></th>
 			</tr>
 		</thead>
 		<tbody>
