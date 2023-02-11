@@ -5,6 +5,7 @@ on:
       -main
   pull_request:
 jobs:
+  if contains(steps.changed-files.outputs.all_changed_files, '**/**.tex')
   run-textlint:
     runs-on: ubuntu-latest
     permissions:
