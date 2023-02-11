@@ -43,6 +43,7 @@ jobs:
             sudo apt-get install xsltproc libxml2-utils
             xmllint --format ./textlint.xml > ./ftextlint.xml
             sed 2i\<?xml-stylesheet\ type=text\/xsl\ href=./toHTML.xsl\ \?\> ./ftextlint.xml > ./ptextlint.xml
+            sed 's/([^)]*)//g' ./ptextlint.xml
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             xsltproc --output body.html ./toHTML.xsl ptextlint.xml
             cat body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
