@@ -33,7 +33,7 @@ jobs:
       - name: Run textlint
         run: |
             ls -a
-            wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
+            time && wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
             ls -a
             cat .textlintrc.json
             npx textlint -f checkstyle **/**.tex >> ./textlint.xml
