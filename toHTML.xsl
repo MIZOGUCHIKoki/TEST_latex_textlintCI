@@ -19,7 +19,6 @@
 <!-- file -->
 <xsl:template match="file">
  	<h1><xsl:value-of select="@name"/></h1>
-	<xsl:if test="error!=''">
 	<table>
 		<thead>
 			<tr>
@@ -34,7 +33,6 @@
 				<xsl:apply-templates />
 		</tbody>
 	</table>
-	</xsl:if>
 </xsl:template>
 
 <xsl:template match="error">
