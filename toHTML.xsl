@@ -36,10 +36,10 @@
 </xsl:template>
 
 <xsl:template match="error">
-		<tr><td><xsl:value-of select="@line"/></td>
-		<td><xsl:value-of select="@column"/></td>
-		<td><xsl:value-of select="@severity"/></td>
-		<td><small><xsl:value-of select="@message"/></small></td>
-		<td><small><xsl:value-of select="@source"/></small></td></tr>
+		<tr><td width="30"><xsl:value-of select="@line"/></td>
+		<td width="30"><xsl:value-of select="@column"/></td>
+		<td width="30"><xsl:value-of select="@severity"/></td>
+		<td width="100"><small><xsl:value-of select="@message"/></small></td>
+		<td width="80><small><xsl:value-of select="@source"/></small></td></tr>
 </xsl:template>
 </xsl:stylesheet>
