@@ -1,8 +1,12 @@
-name: fixed text
-on: issue_comment
+name: fixed_text
+
+on: 
+  issue_comment:
+    types:
+      - created
+      - edited
 jobs:
   pr_commented:
-    # This job only runs for pull request comments
     name: PR comment
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
