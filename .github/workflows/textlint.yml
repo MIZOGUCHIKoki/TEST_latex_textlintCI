@@ -22,7 +22,11 @@ jobs:
           node-version: 14
           cache: 'npm'
       - name: Install packages via packages.json
-        run: npm install
+        run: |
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
+          npm install
       - name: Run textlint (avoiding error)
         run: |
             npx textlint -f checkstyle **/**.tex >> ./textlint.xml
@@ -30,12 +34,13 @@ jobs:
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
+            wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/toHTML.xsl
             sudo apt-get install xsltproc libxml2-utils
             sudo xmllint --format ./textlint.xml > ./ftextlint.xml
-            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./.github/conf/toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
+            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
-            xsltproc --output body.html ./.github/conf/toHTML.xsl ptextlint.xml
+            xsltproc --output body.html ./toHTML.xsl ptextlint.xml
             cat  body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
             # pr comment
             gh pr comment --body-file ./.body.html "${URL}"      
