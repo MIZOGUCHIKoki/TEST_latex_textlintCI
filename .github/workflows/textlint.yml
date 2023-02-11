@@ -30,7 +30,8 @@ jobs:
           npm install
       - name: Run textlint (avoiding error)
         run: |
-            # wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
+            rm .textlintrc.json
+            wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
             npx textlint -f checkstyle **/**.tex >> ./textlint.xml
             echo $?
       - name: Report if textlint finds problems
