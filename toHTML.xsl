@@ -40,6 +40,6 @@
 		<td width="30"><xsl:value-of select="@column"/></td>
 		<td width="30"><xsl:value-of select="@severity"/></td>
 		<td width="100"><small><xsl:value-of select="@message"/></small></td>
-		<td width="80><small><xsl:value-of select="@source"/></small></td></tr>
+		<td width="80"><small><xsl:value-of select="@source"/></small></td></tr>
 </xsl:template>
 </xsl:stylesheet>
