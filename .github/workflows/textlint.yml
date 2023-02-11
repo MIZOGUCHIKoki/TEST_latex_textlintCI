@@ -39,11 +39,15 @@ jobs:
             wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/toHTML.xsl
             sudo apt-get install xsltproc libxml2-utils
             sudo xmllint --format ./textlint.xml > ./ftextlint.xml
+            cat ./ftextlint.xml
             sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
+            cat ./ptextlint.xml
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             xsltproc --output body.html ./toHTML.xsl ptextlint.xml
+            cat body.html
             cat  body.html | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.html
+            ./.body.html
             # pr comment
             gh pr comment --body-file ./.body.html "${URL}"      
         env:
