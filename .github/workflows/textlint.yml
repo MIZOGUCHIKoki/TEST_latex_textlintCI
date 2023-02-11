@@ -4,6 +4,8 @@ on:
     branches:
       -main
   pull_request:
+    paths:
+      - '**/**.tex'
 jobs:
   run-textlint:
     runs-on: ubuntu-latest
