@@ -1,0 +1,44 @@
+name: run-fixedText
+on: 
+  issue_comment:
+    types:
+      - created
+      - edited
+jobs:
+  run-fixedText:
+    if: github.event_name == 'issue_comment' &&
+        contains(github.event.comment.html_url, '/pull/') && 
+        startsWith(github.event.comment.body, '/fixed') )
+        
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Switch to pull request branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Setup node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install packages via packages.json
+        run: npm install
+      - name: Run textlint to fix.
+        run: |
+            npx textlint --fix **/**.tex >> ./.textlint.log
+            echo ./.textlint.log
+            echo $?
+      - name: Comment on PullRequest
+        if: ${{ failure()}}
+        run: |
+            if [ ${failure()} -eq 1 ]; then
+              echo "Text correction failed!! :boom:" > ./.body.txt
+            else
+              echo "Successfully corrected test :heart:" > ./.body.txt
+            fi
+            gh pr comment --body-file ./.body.html "${URL}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}
