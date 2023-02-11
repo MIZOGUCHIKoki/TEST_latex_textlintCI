@@ -29,11 +29,11 @@ jobs:
         if: ${{ !failure() && github.ref != 'refs/heads/main'}}
         run: |
             sudo apt-get install xsltproc libxml2-utils
-            sudo xmllint --format ./textlint.xml > ./textlint.xml
-            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./textlint.xml > ./textlint.xml
+            sudo xmllint --format ./textlint.xml > ./ftextlint.xml
+            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=test.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
             # create body file
             # pwd_esc=$(pwd | sed 's/\//\\\//g')
-            xsltproc --output ./.body.html toHTML.xsl textlint.xml
+            xsltproc --output ./.body.html toHTML.xsl ptextlint.xml
             # pr comment
             gh pr comment --body-file ./.body.txt "${URL}"      
         env:
