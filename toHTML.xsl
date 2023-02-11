@@ -19,6 +19,7 @@
 <!-- file -->
 <xsl:template match="file">
  	<h1><xsl:value-of select="@name"/></h1>
+	<xsl:if test="error!=''">
 	<table>
 		<thead>
 			<tr>
@@ -33,13 +34,14 @@
 				<xsl:apply-templates />
 		</tbody>
 	</table>
+	</xsl:if>
 </xsl:template>
 
 <xsl:template match="error">
-		<tr><td width="30"><xsl:value-of select="@line"/></td>
-		<td width="30"><xsl:value-of select="@column"/></td>
-		<td width="30"><xsl:value-of select="@severity"/></td>
-		<td width="100"><small><xsl:value-of select="@message"/></small></td>
-		<td width="80"><small><xsl:value-of select="@source"/></small></td></tr>
+		<tr><td><xsl:value-of select="@line"/></td>
+		<td><xsl:value-of select="@column"/></td>
+		<td><xsl:value-of select="@severity"/></td>
+		<td><small><xsl:value-of select="@message"/></small></td>
+		<td><small><xsl:value-of select="@source"/></small></td></tr>
 </xsl:template>
 </xsl:stylesheet>
