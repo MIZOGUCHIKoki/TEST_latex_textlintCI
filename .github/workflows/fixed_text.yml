@@ -1,3 +1,5 @@
+name: fixed text
+on: issue_comment
 jobs:
   pr_commented:
     # This job only runs for pull request comments
