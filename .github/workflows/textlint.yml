@@ -33,8 +33,9 @@ jobs:
             sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
             cat ./ptextlint.xml
             # create body file
-            # pwd_esc=$(pwd | sed 's/\//\\\//g')
+            pwd_esc=$(pwd | sed 's/\//\\\//g')
             xsltproc --output body.html toHTML.xsl ptextlint.xml
+            cat ./.textlint.log | sed "s/${pwd_esc}/:memo: ./g" >> ./.body.txt
             ls
             # pr comment
             gh pr comment --body-file body.html "${URL}"      
