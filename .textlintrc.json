@@ -14,7 +14,7 @@
             "max-comma": false,
             "no-exclamation-question-mark": false
         },
-        "preset-ja-engineering-paper": true,
+        "preset-ja-engineering-paper": false,
         "preset-jtf-style": {
             "1.2.1.句点(。)と読点(、)": false,
             "1.2.2.ピリオド(.)とカンマ(,)": false,
