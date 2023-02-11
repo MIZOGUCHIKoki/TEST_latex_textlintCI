@@ -2,7 +2,7 @@ name: run-textlint
 on: 
   push:
     branches:
-      -main
+      - main
   pull_request:
     paths:
       - '**/**.tex'
