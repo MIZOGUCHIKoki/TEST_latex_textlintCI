@@ -25,7 +25,6 @@ jobs:
       - name: moved files
         run: | 
           cp -a ConfigFiles/tex_textlint/. ./
-          ls -a
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
@@ -33,20 +32,15 @@ jobs:
           cache: 'npm'
       - name: Install packages via packages.json
         run: |
-          cat .textlintrc.json
           npm install
       - name: Run textlint
         run: |
-            ls -a
-            cat .textlintrc.json
             npx textlint -f checkstyle **/**.tex >> ./textlint.xml
             echo $?
       - name: Report if textlint finds problems
         if: ${{ failure() && github.ref != 'refs/heads/main'}}
         run: |
-            cat ./textlint.xml
             wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/toHTML.xsl
-            ls -a
             sudo apt-get install xsltproc libxml2-utils
             xmllint --format ./textlint.xml > ./ftextlint.xml
             sed 2i\<?xml-stylesheet\ type=text\/xsl\ href=./toHTML.xsl\ \?\> ./ftextlint.xml > ./ptextlint.xml
