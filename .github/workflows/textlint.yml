@@ -31,6 +31,7 @@ jobs:
       - name: Run textlint (avoiding error)
         run: |
             ls -a
+            rm -rf .textlintrc.json
             wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
             ls -a
             cat ./.textlintrc.json
