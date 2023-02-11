@@ -42,7 +42,7 @@ jobs:
             cat ./textlint.xml
             sudo xmllint --format ./textlint.xml > ./ftextlint.xml
             cat ./ftextlint.xml
-            sed 2i\<?xml-stylesheet\ type=text\/xsl\href=./toHTML.xsl\?\> ./ftextlint.xml > ./ptextlint.xml
+            sed 2i\<?xml-stylesheet\ type=text\/xsl\ href=./toHTML.xsl\ \?\> ./ftextlint.xml > ./ptextlint.xml
             cat ./ptextlint.xml
             # create body file
             pwd_esc=$(pwd | sed 's/\//\\\//g')
