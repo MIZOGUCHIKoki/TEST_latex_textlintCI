@@ -26,7 +26,7 @@ jobs:
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package-lock.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/package.json
-          cat ./.textlic.json
+          cat ./.textlintrc.json
       - name: Install packages via packages.json
         run: |
           npm install
