@@ -1,0 +1,17 @@
+name: "Deploy"
+
+on: 
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  deploy:
+    if: github.event_name == 'issue_comment' &&
+        contains(github.event.comment.html_url, '/pull/') && 
+        startsWith(github.event.comment.body, '/deploy') )
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: test
+        run: |
+          echo "デプロイを開始しました (${{ github.event.comment.body }})"
