@@ -35,6 +35,7 @@ jobs:
         uses: wei/wget@v1
         with:
           args: https://raw.githubusercontent.com/MIZOGUCHIKoki/ConfigFiles/main/tex_textlint/.textlintrc.json
+      - run: echo ./.textlintrc.json
       - name: Install packages via packages.json
         run: |
           npm install
