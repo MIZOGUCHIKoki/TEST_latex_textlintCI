@@ -25,6 +25,9 @@ jobs:
       - name: moved files
         run: | 
           cp -a ConfigFiles/tex_textlint/. ./
+          cp -a ConfigFiles/tex_textlint/.github/workflows/textlint.yml ./
+          ls -a
+          cat textlint.yml
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
