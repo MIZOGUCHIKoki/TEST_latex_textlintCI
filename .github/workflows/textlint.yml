@@ -10,6 +10,3 @@ on:
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@test
-    with: 
-      username: ${{ inputs.username }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
