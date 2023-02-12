@@ -9,10 +9,7 @@ on:
       - '**/**.yml'
 jobs:
   run-textlint:
-    permissions:
-      pull-requests: write
-    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@test
     with: 
       username: ${{ inputs.username }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
