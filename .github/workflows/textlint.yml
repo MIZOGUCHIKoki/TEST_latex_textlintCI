@@ -9,4 +9,4 @@ on:
       - '**/**.yml'
 jobs:
   run-textlint:
-    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@test
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@test-1
