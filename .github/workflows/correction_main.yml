@@ -36,7 +36,7 @@ jobs:
       - name: moved files
         run: | 
           cp -a ./ConfigFiles/tex_textlint/. ./
-          cat .gitconfig
+          tree
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
