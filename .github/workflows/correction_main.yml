@@ -35,9 +35,10 @@ jobs:
           path: ConfigFiles
       - name: moved files
         run: | 
-          cp  ./ConfigFiles/textlint/package.json ./
-          cp  ./ConfigFiles/textlint/package-lock.json ./
-          cp  ./ConfigFiles/.gitconfig ./
+          ls -a
+#          cp  ./ConfigFiles/textlint/package.json ./
+#          cp  ./ConfigFiles/textlint/package-lock.json ./
+#          cp  ./ConfigFiles/.gitconfig ./
             
       - name: Setup-node
         uses: actions/setup-node@v3
