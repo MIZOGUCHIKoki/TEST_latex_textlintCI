@@ -10,3 +10,4 @@ on:
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
+    ACCESS_TOKEN: ${{ secretes.ACCESS_TOKEN }}
