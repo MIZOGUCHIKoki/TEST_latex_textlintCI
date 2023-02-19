@@ -1,0 +1,36 @@
+name: deploy dev from feature by pull request
+
+# (0) issueのコメント生成をハンドリング
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  deploy:
+    # add comment of pull request && comment is KEYWORD
+    if: (github.event.issue.pull_request != null) && github.event.comment.body == '!github fixed typo'
+    runs-on: ubuntu-latest
+
+    steps:
+      # (1) github-scriptを使って、プルリクコメントが付けられたプルリクのマージ元ブランチ名を取得
+      - uses: actions/github-script@v2
+        id: set-target-branch
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const pull_request = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+            return pull_request.data.head.ref
+      # (2) (1)で取得したブランチをチェックアウト
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.set-target-branch.outputs.result }}
+      - name: Deploy
+        run: |
+          tree
+          echo "Deploy Action is here"
