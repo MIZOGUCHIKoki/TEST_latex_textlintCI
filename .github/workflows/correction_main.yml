@@ -56,7 +56,7 @@ jobs:
         run: | 
             rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
             git config user.name github-actions
-            git config user.email github-actions@github.com
+            git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add .
             git commit -m "Proofreading"
-            git push -f
+            git push
