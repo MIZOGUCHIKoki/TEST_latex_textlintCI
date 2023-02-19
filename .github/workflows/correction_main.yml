@@ -1,0 +1,55 @@
+name: correction_CALLED
+on:
+  workflow_dispatch:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  Job_correction:
+    if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github-Script
+        uses: actions/github-script@v2
+        id: set-target-branch
+        with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          result-encoding: string
+          script: |
+            const pull_request = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+            return pull_request.data.head.ref
+            
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.set-target-branch.outputs.result }}
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          repository: MIZOGUCHIKoki/ConfigFiles
+          path: ConfigFiles
+      - name: moved files
+        run: | 
+          cp -a ./ConfigFiles/tex_textlint/. ./
+      - name: Setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install packages via packages.json
+        run: |
+          npm install
+      - name: Fix typo
+        run: |
+          npx textlint --fix **/**.tex
+          echo $?
+      - name: Check files after correction...
+        run: |
+          cat **/**.tex
+          
+      
