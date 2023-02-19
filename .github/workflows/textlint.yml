@@ -7,12 +7,9 @@ on:
     paths:
       - '**/**.tex'
   workflow_dispatch:
-  
-#env:
-#  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
     secrets:
-#      i_token: ${{ env.GITHUB_TOKEN }}
-      i_token: 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
+      gh_token: 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
