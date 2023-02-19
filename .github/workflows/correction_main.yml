@@ -38,6 +38,13 @@ jobs:
           cp -a ./ConfigFiles/tex_textlint/. ./
           cp -a ./ConfigFiles/.gitconfig ./
           cat .gitconfig
+      
+      - name: Check files after correction...
+        run: | 
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git branch -a
+            
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
@@ -50,8 +57,3 @@ jobs:
         run: |
           npx textlint --fix **/**.tex
           echo $?
-      - name: Check files after correction...
-        run: | 
-            git config user.name github-actions
-            git config user.email github-actions@github.com
-            git branch -a
