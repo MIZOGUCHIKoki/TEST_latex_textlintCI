@@ -11,5 +11,5 @@ on:
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
-#    secrets:
-#      gh_token: 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
+    secrets:
+      gh_token: ${{ secrets.ACCESS_TOKEN}}
