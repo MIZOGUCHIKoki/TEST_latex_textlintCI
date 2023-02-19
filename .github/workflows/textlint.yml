@@ -12,4 +12,4 @@ jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
     secrets:
-      gh_token: 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
+#      gh_token: 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
