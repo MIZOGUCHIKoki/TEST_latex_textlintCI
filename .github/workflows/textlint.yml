@@ -11,4 +11,4 @@ jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
     with:
-      i_token: ${{ secretes.ACCESS_TOKEN }}
+      i_token: ${{ secrets.ACCESS_TOKEN }}
