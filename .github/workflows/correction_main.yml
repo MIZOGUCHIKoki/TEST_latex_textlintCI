@@ -4,8 +4,6 @@ on:
   issue_comment:
     types:
       - created
-permissions:
-  contents: write
 
 jobs:
   Job_correction:
@@ -61,4 +59,4 @@ jobs:
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add .
             git commit -m "Proofreading"
-            git push
+            git push origin ${{ github.ref_name }}
