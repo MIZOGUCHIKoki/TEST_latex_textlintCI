@@ -54,7 +54,7 @@ jobs:
       - name: Remove useless files and Check files after correction...
         if: ${{ failure() }}
         run: | 
-            echo ${{ github.event.repository.default_branch }}
+            echo ${{ github.event.pull_request.head }}
             rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
             git config user.name github-actions
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
