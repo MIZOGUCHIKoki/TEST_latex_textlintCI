@@ -36,6 +36,7 @@ jobs:
       - name: moved files
         run: | 
           cp -a ./ConfigFiles/tex_textlint/. ./
+          cat .gitconfig
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
@@ -48,8 +49,6 @@ jobs:
         run: |
           npx textlint --fix **/**.tex
           echo $?
-      - name: Check files after correction...
-        run: |
-          cat **/**.tex
+#      - name: Check files after correction...
+#        run: |
           
-      
