@@ -13,6 +13,6 @@ on:
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
-    with:
+    secrets:
 #      i_token: ${{ env.GITHUB_TOKEN }}
       i_token: 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
