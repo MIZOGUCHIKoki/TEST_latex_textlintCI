@@ -35,7 +35,7 @@ jobs:
           path: ConfigFiles
       - name: moved files
         run: | 
-          ls -a
+          ls -a ConfigFiles/
 #          cp  ./ConfigFiles/textlint/package.json ./
 #          cp  ./ConfigFiles/textlint/package-lock.json ./
 #          cp  ./ConfigFiles/.gitconfig ./
