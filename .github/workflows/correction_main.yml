@@ -35,9 +35,9 @@ jobs:
           path: ConfigFiles
       - name: moved files
         run: | 
-          cp -a ./ConfigFiles/textlint/*.json ./
+          cp  ./ConfigFiles/textlint/package.json ./
+          cp  ./ConfigFiles/textlint/lock-package.json ./
           cp  ./ConfigFiles/.gitconfig ./
-          cat .gitconfig
             
       - name: Setup-node
         uses: actions/setup-node@v3
@@ -53,7 +53,6 @@ jobs:
       - name: Remove useless files and Check files after correction...
         if: ${{ failure() }}
         run: | 
-            cat *.tex
             rm -rf ConfigFiles node_modules *.json
             git config user.name github-actions
             git config user.email github-actions@github.com
