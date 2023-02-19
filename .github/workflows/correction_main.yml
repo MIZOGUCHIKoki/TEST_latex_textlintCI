@@ -36,6 +36,7 @@ jobs:
       - name: moved files
         run: | 
           cp  ./ConfigFiles/tex_textlint/package.json ./
+          cp  ./ConfigFiles/tex_textlint/.textlintrc.json ./
           cp  ./ConfigFiles/tex_textlint/package-lock.json ./
           cp  ./ConfigFiles/.gitconfig ./
             
