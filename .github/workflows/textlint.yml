@@ -6,9 +6,12 @@ on:
   pull_request:
     paths:
       - '**/**.tex'
-      - '**/**.yml'
+  workflow_dispatch:
+  
+env:
+  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint.yml@main
     with:
-      i_token: ${{ secrets.ACCESS_TOKEN }}
+      i_token: ${{ secrets.GITHUB_TOKEN }}
