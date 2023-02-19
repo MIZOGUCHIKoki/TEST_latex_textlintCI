@@ -35,8 +35,8 @@ jobs:
           path: ConfigFiles
       - name: moved files
         run: | 
-          cp -a ./ConfigFiles/tex_textlint/. ./
-          cp -a ./ConfigFiles/.gitconfig ./
+          cp -a ./ConfigFiles/textlint/*.json ./
+          cp  ./ConfigFiles/.gitconfig ./
           cat .gitconfig
             
       - name: Setup-node
@@ -51,11 +51,12 @@ jobs:
         run: |
           npx textlint --fix **/**.tex
           echo $?
-      - name: Check files after correction...
+      - name: Remove useless files and Check files after correction...
         if: ${{ failure() }}
         run: | 
+            rm -rf ConfigFiles node_modules *.json
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git add **/**.tex
+            git add .
             git commit -m "Proofreading"
             git push -f
