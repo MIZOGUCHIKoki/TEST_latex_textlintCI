@@ -50,6 +50,8 @@ jobs:
         run: |
           npx textlint --fix **/**.tex
           echo $?
-#      - name: Check files after correction...
-#        run: |
-          
+      - name: Check files after correction...
+        run: | 
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git branch -a
