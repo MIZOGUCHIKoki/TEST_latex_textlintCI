@@ -7,7 +7,7 @@ on:
 
 jobs:
   Job_fixtypo:
-    if: (github.event.issue.pull_request != null) && github.event.comment.body == 'fixed_typo'
+    if: (github.event.issue.pull_request != null) && github.event.comment.body == 'fix_typo'
     runs-on: ubuntu-latest
     steps:
       - name: Github-Script
