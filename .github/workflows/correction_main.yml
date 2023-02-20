@@ -60,5 +60,5 @@ jobs:
             git add .
             git commit -m "Proofreading"
             git branch -a
-#            echo ${{ steps.set-target-branch.outputs.result }}
-#            git push origin ${{ steps.set-target-branch.outputs.result }}
+            echo ${{ steps.set-target-branch.outputs.result }}
+            git push origin ${{ steps.set-target-branch.outputs.result }}
