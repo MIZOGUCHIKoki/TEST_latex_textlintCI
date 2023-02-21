@@ -69,7 +69,7 @@ jobs:
       - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
         run: | 
-            echo "machine github.com/n login MIZOGUCHIKoki/n password ${{secrets.ACCESS_TOKEN}}" >> .netrc
+            echo "machine github.com\nlogin MIZOGUCHIKoki\npassword ${{secrets.ACCESS_TOKEN}}" >> .netrc
             cat .netrc
             git config user.name github-actions
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
