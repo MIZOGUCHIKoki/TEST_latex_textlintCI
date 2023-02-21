@@ -10,7 +10,8 @@ jobs:
     if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
     runs-on: ubuntu-latest
     env:
-      DIFF_CHECK: 0
+      # if DIFF_CHECK=0 then **/**.tex files was not changed by textlint.
+      DIFF_CHECK: 0      
     steps:
       - name: Github-Script
         uses: actions/github-script@v2
@@ -60,9 +61,9 @@ jobs:
           git add .
           git diff >> diff.txt
           cat diff.txt
-          if [ -e diff.txt ];
+          if [ ! -s diff.txt ];
           then
-            $DIFF_CHECK=1
+            env.DIFF_CHECK=1
           fi
       - name: Push to " ${{ steps.set-target-branch.outputs.result }} Branch "
         if: ${{ env.DIFF_CHECK == 1 }}
