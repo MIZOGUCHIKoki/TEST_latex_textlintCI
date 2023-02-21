@@ -54,17 +54,17 @@ jobs:
       - name: Fix typo
         run: |
           npx textlint --fix **/**.tex
-      - name: Check changed files
+      - name: Remove useless files
         if: ${{ always() }}
         run: |
           rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
-          git add .
-          git status
-#          cat diff.txt
-#          if [ ! -s diff.txt ];
-#          then
-#            cat diff.txt
-#          fi
+      - name: Check changed files
+        run: |
+          git diff >> diff.txt
+          if [ ! -s diff.txt ];
+          then
+            cat diff.txt
+          fi
       - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
         run: | 
