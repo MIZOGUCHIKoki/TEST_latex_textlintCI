@@ -59,7 +59,7 @@ jobs:
         run: |
           rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
           git add .
-          git diff
+          git status
 #          cat diff.txt
 #          if [ ! -s diff.txt ];
 #          then
