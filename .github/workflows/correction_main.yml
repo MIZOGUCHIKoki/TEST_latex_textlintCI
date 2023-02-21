@@ -61,10 +61,9 @@ jobs:
       - name: Check changed files
         run: |
           git diff >> diff.txt
-          cat diff.txt
-          if [ ! -s diff.txt ];
+          if [ -s diff.txt ];
           then
-            cat diff.txt
+            echo debug
           fi
       - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
