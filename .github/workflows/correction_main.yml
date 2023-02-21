@@ -35,7 +35,7 @@ jobs:
         with:
           repository: MIZOGUCHIKoki/ConfigFiles
           path: ConfigFiles
-      - name: moved files
+      - name: Copy files to current directory
         run: | 
           cp  ./ConfigFiles/tex_textlint/package.json ./
           cp  ./ConfigFiles/tex_textlint/.textlintrc.json ./
