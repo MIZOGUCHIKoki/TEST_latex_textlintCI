@@ -6,8 +6,6 @@ on:
   pull_request:
     paths:
       - '**/**.tex'
-  workflow_dispatch:
-
 jobs:
   run-textlint:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
