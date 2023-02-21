@@ -58,7 +58,6 @@ jobs:
             git config user.name github-actions
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add .
+            git log --oneline --graph
             git commit -m "Proofreading"
-            git branch -a
-            echo ${{ steps.set-target-branch.outputs.result }}
-            git push origin ${{ steps.set-target-branch.outputs.result }}
+            git push origin HEAD
