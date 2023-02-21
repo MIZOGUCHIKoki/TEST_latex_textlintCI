@@ -9,6 +9,8 @@ jobs:
   job_correction_CALLED:
     if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
     runs-on: ubuntu-latest
+    env:
+      DIFF_CHECK: 0
     steps:
       - name: Github-Script
         uses: actions/github-script@v2
@@ -52,13 +54,17 @@ jobs:
         run: |
           npx textlint --fix **/**.tex
       - name: Check changed files
+        if: ${{ always() }}
         run: |
           rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
           git add .
           git diff >> diff.txt
-          cat diff
+          cat diff.txt
+          if [ -e diff.txt ];
+            $DIFF_CHECK=1
+          fi
       - name: Push to " ${{ steps.set-target-branch.outputs.result }} Branch "
-        if: diff != ""
+        if: ${{ env.DIFF_CHECK == 1 }}
         run: | 
             git config user.name github-actions
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
