@@ -63,9 +63,9 @@ jobs:
           cat diff.txt
           if [ ! -s diff.txt ];
           then
-            env.DIFF_CHECK=1
+            cat diff.txt
           fi
-      - name: Push to " ${{ steps.set-target-branch.outputs.result }} Branch "
+      - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
         run: | 
             git config user.name github-actions
