@@ -4,6 +4,7 @@ on:
   issue_comment:
     types:
       - created
+      - edited
 
 jobs:
   job_correction_CALLED:
@@ -68,6 +69,7 @@ jobs:
       - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
         run: | 
+            echo "machine github.com/nlogin MIZOGUCHIKoki/npassword ${{secrets.ACCESS_TOKEN}}" >> .netrc
             git config user.name github-actions
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git commit -am "Proofreading"
