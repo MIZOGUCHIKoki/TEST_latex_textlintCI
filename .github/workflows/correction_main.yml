@@ -63,7 +63,8 @@ jobs:
           git diff >> diff.txt
           if [ -s diff.txt ];
           then
-            echo 1 >> $DIFF_CHECK
+            echo "1"
+            echo "1" >> $DIFF_CHECK
           fi
       - name: Push to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
