@@ -61,6 +61,7 @@ jobs:
           git diff >> diff.txt
           cat diff.txt
           if [ -e diff.txt ];
+          then
             $DIFF_CHECK=1
           fi
       - name: Push to " ${{ steps.set-target-branch.outputs.result }} Branch "
