@@ -61,6 +61,7 @@ jobs:
       - name: Check changed files
         run: |
           git diff >> diff.txt
+          cat diff.txt
           if [ ! -s diff.txt ];
           then
             cat diff.txt
