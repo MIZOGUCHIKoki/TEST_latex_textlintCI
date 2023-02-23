@@ -52,7 +52,7 @@ jobs:
       - name: Install packages via packages.json
         run: |
           npm install
-      - name: Fix typo
+      - name: Correct
         run: |
           npx textlint --fix **/**.tex
       - name: Remove useless files
