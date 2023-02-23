@@ -5,7 +5,7 @@ on:
       - main
   pull_request_target:
 jobs:
-  run-textlint:
+  run-textlint_WF:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}
