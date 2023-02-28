@@ -1,0 +1,7 @@
+diff --git a/A/B/C/main.tex b/A/B/C/main.tex
+index b334f9a..6019926 100644
+--- a/A/B/C/main.tex
++++ b/A/B/C/main.tex
+@@ -1 +1 @@
+-いい
++よい
