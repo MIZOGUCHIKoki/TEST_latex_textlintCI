@@ -10,9 +10,6 @@ jobs:
   job_correction_CALLED:
     if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
     runs-on: ubuntu-latest
-    env:
-      # if DIFF_CHECK=0 then **/**.tex files was not changed by textlint.
-      DIFF_CHECK: 0      
     steps:
       - name: Github-Script
         uses: actions/github-script@v2
@@ -61,15 +58,16 @@ jobs:
         run: |
           rm -rf ConfigFiles node_modules package-lock.json package.json .textlintrc.json .gitconfig
       - name: Check changed files
+        id: diffcheck
         run: |
           git diff >> diff.txt
           if [ -s diff.txt ];
           then
-            echo "DIFF_CHECK=1" >> $GITHUB_ENV
+            echo "RESULT=1" >> $GITHUB_OUTPUT
           fi
           rm diff.txt
       - name: Commit to current branch
-        if: ${{ env.DIFF_CHECK == 1 }}
+        if: ${{ steps.diffcheck.outputs.RESULT == 1 }}
         run: |
           git branch -a
           echo ${{ github.head_ref }}
@@ -80,3 +78,8 @@ jobs:
           git push origin HEAD
         env:
           GUTHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+  run-textlint_WF:
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
+    secrets:
+      gh_token: ${{ secrets.ACCESS_TOKEN }}
