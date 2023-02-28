@@ -73,3 +73,5 @@ jobs:
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git commit -am "Proofreading"
             git push
+        env:
+          GITHUB_TOKEN: $${{ secrets.ACCESS_TOKEN }}
