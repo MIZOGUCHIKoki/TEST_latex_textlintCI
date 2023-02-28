@@ -70,11 +70,12 @@ jobs:
       - name: Commit to current branch
         if: ${{ env.DIFF_CHECK == 1 }}
         run: |
-          echo ${GITHUB_REF}
+          git branch -a
+          echo ${{ github.head_ref }
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git commit -am "Proofreading"
-          git push origin HEAD:${GITHUB_REF}
+          git push origin HEAD
         env:
           GUTHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
