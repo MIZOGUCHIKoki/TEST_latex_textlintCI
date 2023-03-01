@@ -30,13 +30,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ steps.set-target-branch.outputs.result }}
-          token: ${{ secrets.ACCESS_TOKEN }}
         
       - name: Clone
         uses: actions/checkout@v3
         with:
           repository: MIZOGUCHIKoki/ConfigFiles
           path: ConfigFiles
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Copy files to current directory
         run: | 
           cp  ./ConfigFiles/tex_textlint/package.json ./
