@@ -1,4 +1,4 @@
-name: correction_CALLED
+name: correction
 on:
   issue_comment:
     types:
@@ -6,7 +6,7 @@ on:
       - edited
 
 jobs:
-  job_correction_CALLED:
+  job_correction_WF:
     uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/correction_main.yml@main
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}
