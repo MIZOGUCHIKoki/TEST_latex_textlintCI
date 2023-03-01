@@ -8,7 +8,6 @@ on:
 
 jobs:
   job_correction_CALLED:
-    if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
     uses: MIZOGUCHIKoki/COnfigFiles/.github/workflows/correction_main.yml@main
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}
