@@ -74,7 +74,3 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "Proofreading"
           git push
-#          git config --global credential. Helper "!f() { echo \`"username=`${GIT_USER}`npassword=`${TOKEN}\`"; }; f"
-#        env:
-#          TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#          GIT_USER: "94270819+MIZOGUCHIKoki@users.noreply.github.com"
