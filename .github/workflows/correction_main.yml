@@ -69,10 +69,11 @@ jobs:
       - name: Commit to current branch
         if: ${{ steps.diffcheck.outputs.RESULT == 1 }}
         run: |
+          git branch -a
           git config --global user.name "github-actions"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "Proofreading"
-          git push HEAD
+          git push
 #          git config --global credential. Helper "!f() { echo \`"username=`${GIT_USER}`npassword=`${TOKEN}\`"; }; f"
 #        env:
 #          TOKEN: ${{ secrets.ACCESS_TOKEN }}
